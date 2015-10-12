@@ -10,7 +10,7 @@ int main()
     }
 
     union check c;
-    c.x=1;
+    c.x = 1;
 
     if (c.bytes[0] == 1)
     {
