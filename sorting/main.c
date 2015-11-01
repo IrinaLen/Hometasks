@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#define N 32767
 
 void sort1 (int *data, size_t count) // n^2
 {
@@ -20,10 +21,10 @@ void sort1 (int *data, size_t count) // n^2
     }
     clock_t finish = clock();
 
-    printf("%lf   \n",(double) (finish - start) / CLOCKS_PER_SEC);
+    printf("%lf   ",(double) (finish - start) / CLOCKS_PER_SEC);
 }
 
-void sort2 (int *data, long int st, long int fin) //n log n
+void sort2 (int *data, long int st, long int fin, int *help) //n log n
 {
     int tmp;
 
@@ -43,11 +44,10 @@ void sort2 (int *data, long int st, long int fin) //n log n
         return;
     }
 
-    sort2 (data, st, st + (fin - st) / 2);
-    sort2 (data, st + (fin - st) / 2, fin);
+    sort2 (data, st, st + (fin - st) / 2, help);
+    sort2 (data, st + (fin - st) / 2, fin, help);
 
-    int *help;
-    help = malloc(fin * sizeof(int));
+
     long int s1 = st, f1 = st + (fin - st) / 2;
     long int s2 = f1, i;
 
@@ -72,19 +72,25 @@ void sort2 (int *data, long int st, long int fin) //n log n
     }
 
 }
-void sort3(int *myarray, size_t length)
+
+void sort3(int *myarray, size_t length) // n
 {
-    int i, j, n;
-    int *counting;
-    counting = malloc(n * sizeof(int));//?
+
+    int i, j, n = 0;
+    int counting[N];
+    for (i = 0; i < N; i++)
+    {
+        counting[i] = 0;
+    }
+
     clock_t start = clock();
 
     for(i = 0; i < length; i++)
     {
         counting[myarray[i]]++;
     }
-    n = 0;
-    for(i = 0; i < length; i++)
+
+   for(i = 0; i < N; i++)
     {
         for(j = 0; j < counting[i]; j++)
         {
@@ -94,9 +100,7 @@ void sort3(int *myarray, size_t length)
     }
 
     clock_t finish = clock();
-    printf("%lf   ",(double) (finish - start) / CLOCKS_PER_SEC);
-
-    free(myarray);
+    printf("%lf   \n",(double) (finish - start) / CLOCKS_PER_SEC);
 
 }
 
@@ -109,70 +113,86 @@ int compare(const void *i, const void *j)
 int main()
 {
     long int i, n = 5;
-    int massivb[n], massivm[n], massivs[n];
+    int massivb[n], massivm[n], massivs[n], massivq[n];
+    int *help;
+    help = malloc(n * sizeof(int));
 
     for (i = 0; i < n; i++)
     {
-        massivs[i] = massivm[i] = massivb[i] = rand() % 100;
-        printf("%d ", massivb[i]);
-
+        massivq[i] = massivs[i] = massivm[i] = massivb[i] = rand() % N;
     }
 
-/*  printf("            n ^ 2 \t n(log n)\t qsort\n");
+    printf("            n ^ 2 \t n(log n)\t qsort\t n\n");
     printf("%10ld  ", n);
 
     sort1 (massivb, n);
 
-
     clock_t start = clock();
-    sort2 (massivm, 0, n);
+    sort2 (massivm, 0, n, help);
     clock_t finish = clock();
     printf("%lf   ",(double) (finish - start) / CLOCKS_PER_SEC);
 
-    printf("   ");
 
     start = clock();
-    qsort(massivs, n, sizeof(int), compare);
+    qsort(massivq, n, sizeof(int), compare);
     finish = clock();
 
-    printf("%lf\n",(double) (finish - start) / CLOCKS_PER_SEC);
-*/
+    printf("%lf  ",(double) (finish - start) / CLOCKS_PER_SEC);
 
-    printf("\n");
-    sort3(massivb, n);
-   /*
+    sort3(massivs, n);
+
     for (n = 10; n <= 100000000; n *= 10)
     {
         printf("%10ld  ", n);
-        int *massivb, *massivm, *massivs;
+        int *massivb, *massivm, *massivs, *massivq;
 
         massivb = malloc(n * sizeof(int));
         massivm = malloc(n * sizeof(int));
         massivs = malloc(n * sizeof(int));
+        massivq = malloc(n * sizeof(int));
+        if (n == 100000000)
+        {
+            free(massivb);
+        }
+
+        help = malloc(n * sizeof(int));
+
 
         for (i = 0; i < n; i++)
         {
-            massivs[i] = massivm[i] = massivb[i] = rand() % 100;
+            massivq[i] = massivs[i] = massivm[i] = massivb[i] = rand() % N;
         }
 
+        if (n < 1000000)
+        {
+            sort1 (massivb, n);
+            free (massivb);
 
-      //  sort1 (massivb, n);
+        }
+        else
+        {
+            printf("n/a          "); // из предварительных подсчетов
+            free (massivb);
+        }
 
-   /*     start = clock();
-        sort2 (massivm, 0, n);
-        finish = clock();
-        printf("%lf   \n",(double) (finish - start) / CLOCKS_PER_SEC);
-/*
         start = clock();
-        qsort(massivs, n, sizeof(int), compare);
+        sort2 (massivm, 0, n, help);
         finish = clock();
-        printf("%lf\n",(double) (finish - start) / CLOCKS_PER_SEC);
-
-        free (massivb);
+        printf("%lf   ",(double) (finish - start) / CLOCKS_PER_SEC);
         free (massivm);
+
+
+        start = clock();
+        qsort(massivq, n, sizeof(int), compare);
+        finish = clock();
+        printf("%lf   ",(double) (finish - start) / CLOCKS_PER_SEC);
+        free (massivq);
+
+
+        sort3(massivs, n);
         free (massivs);
 
     }
-*/
+
     return 0;
 }
