@@ -14,6 +14,12 @@ void add(int numb, node1 **begin, node1 **nodeend)
     if (i == 1)
     {
         (*begin) = (node1*) malloc (sizeof(node1));
+        if ((*begin) == NULL)
+        {
+            printf("non memory");
+            return;
+        }
+
         (*begin) -> data = numb;
         (*begin) -> next = NULL;
         (*nodeend) = (*begin);
@@ -22,6 +28,12 @@ void add(int numb, node1 **begin, node1 **nodeend)
     else
     {
         (*nodeend) -> next = (node1*) malloc (sizeof(node1));
+        if ((*nodeend) -> next == NULL)
+        {
+            printf("non memory");
+            return;
+        }
+
         (*nodeend) = (*nodeend) -> next;
         (*nodeend) -> data = numb;
         (*nodeend) -> next = NULL;
@@ -73,7 +85,7 @@ void output (node1 *head)
     printf("\n");
 }
 
-void quit (node1 *head)
+void quit_ (node1 *head)
 {
     node1 *n = head;
     node1 *tmp;
@@ -102,9 +114,6 @@ void circle (node1 *start, node1 **nodeend, int el)
         n = n -> next;
     }
 
-
-
-
     (*nodeend) -> next = n;
     c = 1;
 
@@ -115,12 +124,18 @@ void testnode (node1 *start)
     node1 *t1, *t2, *t;
     t1 = t2 = start;
 
+
+
     do
     {
         t1 = t1 -> next;
+        if (t2 -> next == NULL)
+        {
+            break;
+        }
         t2 = t2 -> next;
         t2 = t2 -> next;
-        t = t2 ->next;
+        t = t2 -> next;
         if (t -> next == NULL)
         {
             break;
@@ -206,6 +221,7 @@ int main()
     {
         nodeend -> next = NULL;
     }
-    quit(begin);
+
+    quit_(begin);
     return 0;
 }

@@ -113,9 +113,19 @@ int compare(const void *i, const void *j)
 int main()
 {
     long int i, n = 5;
-    int massivb[n], massivm[n], massivs[n], massivq[n];
+    int *massivb, *massivm, *massivs, *massivq;
     int *help;
+    massivb = malloc(n * sizeof(int));
+    massivm = malloc(n * sizeof(int));
+    massivs = malloc(n * sizeof(int));
+    massivq = malloc(n * sizeof(int));
     help = malloc(n * sizeof(int));
+
+    if (massivb == NULL || massivm == NULL || massivs == NULL || massivq == NULL || help == NULL)
+    {
+        printf("non memory");
+        return 0;
+    }
 
     for (i = 0; i < n; i++)
     {
@@ -141,21 +151,46 @@ int main()
 
     sort3(massivs, n);
 
+    free(help);
+    free(massivb);
+    free(massivm);
+    free(massivq);
+    free(massivs);
+
     for (n = 10; n <= 100000000; n *= 10)
     {
         printf("%10ld  ", n);
-        int *massivb, *massivm, *massivs, *massivq;
 
-        massivb = malloc(n * sizeof(int));
-        massivm = malloc(n * sizeof(int));
-        massivs = malloc(n * sizeof(int));
-        massivq = malloc(n * sizeof(int));
-        if (n == 100000000)
+
+        if (n < 1000 * 1000)
         {
-            free(massivb);
+            massivb = malloc(n * sizeof(int));
+            massivm = malloc(n * sizeof(int));
+            massivs = malloc(n * sizeof(int));
+            massivq = malloc(n * sizeof(int));
+            help = malloc(n * sizeof(int));
+
+            if (massivb == NULL || massivm == NULL || massivs == NULL || massivq == NULL || help == NULL)
+            {
+                printf("non memory");
+                return 0;
+            }
+
+        }
+        else
+        {
+            massivm = malloc(n * sizeof(int));
+            massivs = malloc(n * sizeof(int));
+            massivq = malloc(n * sizeof(int));
+            help = malloc(n * sizeof(int));
+
+            if (massivm == NULL || massivs == NULL || massivq == NULL || help == NULL)
+            {
+                printf("non memory");
+                return 0;
+            }
         }
 
-        help = malloc(n * sizeof(int));
 
 
         for (i = 0; i < n; i++)
@@ -166,31 +201,32 @@ int main()
         if (n < 1000000)
         {
             sort1 (massivb, n);
-            free (massivb);
-
         }
         else
         {
             printf("n/a          "); // из предварительных подсчетов
-            free (massivb);
         }
 
         start = clock();
         sort2 (massivm, 0, n, help);
         finish = clock();
         printf("%lf   ",(double) (finish - start) / CLOCKS_PER_SEC);
-        free (massivm);
-
 
         start = clock();
         qsort(massivq, n, sizeof(int), compare);
         finish = clock();
         printf("%lf   ",(double) (finish - start) / CLOCKS_PER_SEC);
-        free (massivq);
-
 
         sort3(massivs, n);
-        free (massivs);
+
+        free(help);
+        free(massivm);
+        free(massivq);
+        free(massivs);
+        if (n < 1000 * 1000)
+        {
+            free(massivb);
+        }
 
     }
 

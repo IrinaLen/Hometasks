@@ -1,12 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main()
+void output (float number)
 {
-    float number;
     int s, ex = 0, mant = 0, *first;
-
-    scanf("%f", &number);
 
     first = (int *) &number;
     s = *first;
@@ -19,8 +16,35 @@ int main()
     mant = *first;
     mant = mant & ~(511 << 31);
 
+    if (ex == 255 && mant > 0)
+    {
+        printf("NaN");
+        return;
+    }
+
+    if (ex == 255 && mant == 0)
+    {
+        if (s == 1)
+        {
+            printf("-inf");
+        }
+        else
+        {
+            printf("+inf");
+        }
+        return;
+    }
+
     printf("(-1)^%d * 1.%d * 2^%d", s, mant, (ex - 127));
 
+}
+int main()
+{
+    float number;
+
+    scanf("%f", &number);
+
+    output(number);
     return 0;
 }
 
