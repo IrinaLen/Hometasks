@@ -15,7 +15,7 @@ size_t strlen (char *src) // длина строки +
 size_t strcmp (char *s1, char *s2) //сравнение лексикографическое +
 {
     int i = 0;
-    while (s1[i] == s2[i] && (s1[i] != '\0' || s1[i] != '\0'))
+    while (s1[i] == s2[i] && s1[i] != '\0' && s1[i] != '\0')
     {
         i++;
     }
