@@ -15,7 +15,7 @@ size_t strlen (char *src) // длина строки +
 size_t strcmp (char *s1, char *s2) //сравнение лексикографическое +
 {
     int i = 0;
-    while (s1[i] == s2[i])
+    while (s1[i] == s2[i] && (s1[i] != '\0' || s1[i] != '\0'))
     {
         i++;
     }
@@ -29,7 +29,7 @@ size_t strcmp (char *s1, char *s2) //сравнение лексикографическое +
         return 10;
     }
 
-    if (s1[i] == s2[i])
+    if (s1[i] < s2[i])
     {
         return -10;
     }
@@ -37,28 +37,31 @@ size_t strcmp (char *s1, char *s2) //сравнение лексикографическое +
 
 void strcpy (char *dst, char *src)//копировать из 2 в 1 +
 {
-    int i;
+    int i = 0;
 
-    for (i = 0; i <= strlen(src); i++)
+    while (src[i] != '\0')
     {
         dst[i] = src[i];
+        i++;
     }
-
+    dst[i] = src[i];
 }
 
-void strcat (char *dst, char *src)//записать в конец склеивание строк +
+void strcat (char *dst, char *src)//записать в конец, склеивание строк +
 {
-    int i, j = 0, l1, l2;
+    int i = 0, j = 0;
 
-    l1 = strlen(src);
-    l2 = strlen(dst);
-
-    for (i = l2; i <= (l1 + l2); i++)
+    while (dst[i] != '\0')
+    {
+        i++;
+    }
+    while (src[j] != '\0')
     {
         dst[i] = src[j];
         j++;
+        i++;
     }
-
+    dst[i] = src[j];
 }
 
 
