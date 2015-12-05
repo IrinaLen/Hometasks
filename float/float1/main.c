@@ -7,73 +7,69 @@ union number
     float floatnumb;
 };
 
-void outputs (union number scan)
+
+void beautyprint (int s, int m, int e)
 {
-    const int N = 32, mask = ~ (1 << 31);
-    int i, mynumb[N], part, ex = 0, mant = 0;
-
-    if (scan.floatnumb < 0)
+    int i;
+    if (e == 255 && m != 0)
     {
-        mynumb[0] = 1;
-    }
-    else
-    {
-        mynumb[0] = 0;
-    }
-    part = scan.intnumb & mask;
-
-    for (i = 0; i < N - 1; i++)
-    {
-        mynumb[N - i - 1] = (part >> i) & 1;
-    }
-
-    for (i = 9; i < N; i++)
-    {
-        mant = (mant << 1) + mynumb[i];
-    }
-
-    for (i = 1; i < 9; i++)
-    {
-        ex <<= 1;
-        ex = ex + mynumb[i];
-    }
-
-    if (ex == 255 && mant > 0)
-    {
-        printf("NaN");
+        printf("NaN\n");
         return;
     }
 
-    if (ex == 255 && mant == 0)
+    if (e == 255 && m == 0)
     {
-        if (mynumb[0] == 1)
+        if (s == 1)
         {
-            printf("-inf");
+            printf("-inf\n");
         }
         else
         {
-            printf("+inf");
+            printf("+inf\n");
         }
         return;
     }
 
 
-    printf("(-1)^%d * 1.", mynumb[0]);
-    for (i = 9; i < N; i++)
+    printf("(-1)^%d * 1.", s);
+    for (i = 32 - 9 - 1; i > 1 ; i--)
     {
-        printf("%d", mynumb[i]);
+        printf("%d", (m >> i) & 1);
     }
-    printf(" * 2 ^ %d", ex - 127);
+    printf(" * 2 ^ %d\n", e - 127);
+}
+
+void outputs (union number scan)
+{
+    const int mask = ~ (1 << 31);
+    int i, s, part, ex = 0, mant = 0;
+
+    if (scan.floatnumb < 0)
+    {
+        s = 1;
+    }
+    else
+    {
+        s = 0;
+    }
+
+    part = scan.intnumb & mask;
+    ex = part >> 23;
+    mant = part & (mask >> 8);
+
+    beautyprint(s, mant, ex);
 
 }
 
 int main()
 {
-    union number scan;
-
-    scanf("%f", &scan.floatnumb);
-
-    outputs(scan);
+    union number scan1;
+    union number scan2;
+    scanf("%f", &scan1.floatnumb);
+    outputs(scan1);
+    scanf("%f", &scan2.floatnumb);
+    scan2.floatnumb = scan1.floatnumb / scan2.floatnumb;
+    outputs(scan2);
 
     return 0;
 }
