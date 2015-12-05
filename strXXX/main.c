@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 
-size_t strlen (char *src) // длина строки +
+size_t strlen (char *src) // Г¤Г«ГЁГ­Г  Г±ГІГ°Г®ГЄГЁ +
 {
     int i = 0;
     while (src[i] != '\0')
@@ -12,10 +12,10 @@ size_t strlen (char *src) // длина строки +
     return i;
 }
 
-size_t strcmp (char *s1, char *s2) //сравнение лексикографическое +
+size_t strcmp (char *s1, char *s2) //Г±Г°Г ГўГ­ГҐГ­ГЁГҐ Г«ГҐГЄГ±ГЁГЄГ®ГЈГ°Г ГґГЁГ·ГҐГ±ГЄГ®ГҐ +
 {
     int i = 0;
-    while (s1[i] == s2[i] && (s1[i] != '\0' || s2[i] != '\0'))
+    while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
     {
         i++;
     }
@@ -35,7 +35,7 @@ size_t strcmp (char *s1, char *s2) //сравнение лексикографическое +
     }
 }
 
-void strcpy (char *dst, char *src)//копировать из 2 в 1 +
+void strcpy (char *dst, char *src)//ГЄГ®ГЇГЁГ°Г®ГўГ ГІГј ГЁГ§ 2 Гў 1 +
 {
     int i = 0;
 
@@ -47,7 +47,7 @@ void strcpy (char *dst, char *src)//копировать из 2 в 1 +
     dst[i] = src[i];
 }
 
-void strcat (char *dst, char *src)//записать в конец, склеивание строк +
+void strcat (char *dst, char *src)//Г§Г ГЇГЁГ±Г ГІГј Гў ГЄГ®Г­ГҐГ¶, Г±ГЄГ«ГҐГЁГўГ Г­ГЁГҐ Г±ГІГ°Г®ГЄ +
 {
     int i = 0, j = 0;
 
