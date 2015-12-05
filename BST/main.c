@@ -9,7 +9,7 @@ typedef struct tree
 
 } mytree;
 
-mytree* createlist (int el)//ф-ия создание листа
+mytree* createlist (int el)//Гґ-ГЁГї Г±Г®Г§Г¤Г Г­ГЁГҐ Г«ГЁГ±ГІГ 
 {
     mytree *n;
     n = (mytree*) malloc(sizeof(mytree));
@@ -23,11 +23,10 @@ mytree* createlist (int el)//ф-ия создание листа
     else
     {
         printf("NULL! Error. Please, finish work!");
-        return n = NULL;
     }
 }
 
-mytree* add (mytree *begin, int newel) //a добавлять значения
+mytree* add (mytree *begin, int newel) //a Г¤Г®ГЎГ ГўГ«ГїГІГј Г§Г­Г Г·ГҐГ­ГЁГї
 {
     if (begin == NULL)
     {
@@ -71,7 +70,7 @@ int mostright (mytree *root)
     return root -> list;
 }
 
-mytree* del (mytree *begin, int el)//x удалять значения
+mytree* del (mytree *begin, int el)//x ГіГ¤Г Г«ГїГІГј Г§Г­Г Г·ГҐГ­ГЁГї
 {
     if (begin == NULL)
     {
@@ -122,7 +121,7 @@ mytree* del (mytree *begin, int el)//x удалять значения
     return begin;
 }
 
-mytree* check (mytree *begin, int el)//c проверять, принадлежит ли значение множеству
+mytree* check (mytree *begin, int el)//c ГЇГ°Г®ГўГҐГ°ГїГІГј, ГЇГ°ГЁГ­Г Г¤Г«ГҐГ¦ГЁГІ Г«ГЁ Г§Г­Г Г·ГҐГ­ГЁГҐ Г¬Г­Г®Г¦ГҐГ±ГІГўГі
 {
     if (begin == NULL)
     {
@@ -145,7 +144,7 @@ mytree* check (mytree *begin, int el)//c проверять, принадлежит ли значение множ
     }
 }
 
-void outup (mytree *root)//u печатать текущие элементы множества в возрастающем порядке
+void outup (mytree *root)//u ГЇГҐГ·Г ГІГ ГІГј ГІГҐГЄГіГ№ГЁГҐ ГЅГ«ГҐГ¬ГҐГ­ГІГ» Г¬Г­Г®Г¦ГҐГ±ГІГўГ  Гў ГўГ®Г§Г°Г Г±ГІГ ГѕГ№ГҐГ¬ ГЇГ®Г°ГїГ¤ГЄГҐ
 {
     if (root != NULL)
     {
@@ -155,7 +154,7 @@ void outup (mytree *root)//u печатать текущие элементы множества в возрастающем 
     }
 }
 
-void outdown(mytree *root)//d печатать текущие элементы множества в убывающем порядкe,
+void outdown(mytree *root)//d ГЇГҐГ·Г ГІГ ГІГј ГІГҐГЄГіГ№ГЁГҐ ГЅГ«ГҐГ¬ГҐГ­ГІГ» Г¬Г­Г®Г¦ГҐГ±ГІГўГ  Гў ГіГЎГ»ГўГ ГѕГ№ГҐГ¬ ГЇГ®Г°ГїГ¤ГЄe,
 {
     if (root != NULL)
     {
@@ -168,7 +167,7 @@ void outdown(mytree *root)//d печатать текущие элементы множества в убывающем по
 
 
 
-void pl (mytree *n)// не будет работать
+void pl (mytree *n)// Г­ГҐ ГЎГіГ¤ГҐГІ Г°Г ГЎГ®ГІГ ГІГј
 {
     printf("(%d ", n -> list);
 
@@ -199,7 +198,7 @@ void pl (mytree *n)// не будет работать
 }
 
 
-void treeout(mytree *begin)//s печатать текущие элементы множества в формате (a b c), где a — значение в узле, а b и c — аналогичные представления поддеревьев правого и левого потомка. Пример: "(5 (2 null null) (10 null (12 null null)))"
+void treeout(mytree *begin)//s ГЇГҐГ·Г ГІГ ГІГј ГІГҐГЄГіГ№ГЁГҐ ГЅГ«ГҐГ¬ГҐГ­ГІГ» Г¬Г­Г®Г¦ГҐГ±ГІГўГ  Гў ГґГ®Г°Г¬Г ГІГҐ (a b c), ГЈГ¤ГҐ a вЂ” Г§Г­Г Г·ГҐГ­ГЁГҐ Гў ГіГ§Г«ГҐ, Г  b ГЁ c вЂ” Г Г­Г Г«Г®ГЈГЁГ·Г­Г»ГҐ ГЇГ°ГҐГ¤Г±ГІГ ГўГ«ГҐГ­ГЁГї ГЇГ®Г¤Г¤ГҐГ°ГҐГўГјГҐГў ГЇГ°Г ГўГ®ГЈГ® ГЁ Г«ГҐГўГ®ГЈГ® ГЇГ®ГІГ®Г¬ГЄГ . ГЏГ°ГЁГ¬ГҐГ°: "(5 (2 null null) (10 null (12 null null)))"
 {
     if (begin == NULL)
     {
@@ -211,6 +210,28 @@ void treeout(mytree *begin)//s печатать текущие элементы множества в формате (a 
         printf("\n");
     }
 
+}
+
+void cleaning (mytree *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    if (root -> left == NULL && root -> right == NULL)
+    {
+        free(root);
+        return;
+    }
+    if (root -> left != NULL)
+    {
+        cleaning(root -> left);
+    }
+
+    if (root -> right != NULL)
+    {
+        cleaning(root -> right);
+    }
 
 }
 
@@ -222,7 +243,6 @@ int main()
     int newel;
 
     printf(" a - add element\n x - delete element\n c - check element\n u - output in ascending order (a1 < a2)\n d - output in descending order(a1 > a2)\n s - output in special order\n f - finish work\n");
-
 
     do
     {
@@ -277,7 +297,7 @@ int main()
             continue;
         }
 
-    }while (point != 'f');
-
+    } while (point != 'f');
+    cleaning(root);
     return 0;
 }
