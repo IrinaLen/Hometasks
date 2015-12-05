@@ -85,7 +85,7 @@ void output (node1 *head)
     printf("\n");
 }
 
-void quit_ (node1 *head)
+void cleaning (node1 *head)
 {
     node1 *n = head;
     node1 *tmp;
@@ -123,37 +123,31 @@ void testnode (node1 *start)
 {
     node1 *t1, *t2, *t;
     t1 = t2 = start;
-
-
-
+    if (t2 -> next == NULL)
+    {
+        printf ("Haven't got circle\n");
+        return;
+    }
     do
     {
         t1 = t1 -> next;
+        t2 = t2 -> next;
         if (t2 -> next == NULL)
         {
-            break;
+            printf ("Haven't got circle\n");
+            return;
         }
         t2 = t2 -> next;
-        t2 = t2 -> next;
-        t = t2 -> next;
-        if (t -> next == NULL)
+        if (t2 -> next == NULL)
         {
-            break;
+            printf ("Haven't got circle\n");
+            return;
         }
 
-    }while (t1 != t2 && t2 -> next != NULL);
+    } while (t1 != t2 && t2 -> next != NULL);
 
-
-    if (t1 == t2)
-    {
         printf ("Have got circle\n");
         c = 1;
-
-    }
-    else
-    {
-       printf ("Haven't got circle\n");
-    }
 }
 
 /*
@@ -222,6 +216,6 @@ int main()
         nodeend -> next = NULL;
     }
 
-    quit_(begin);
+    cleaning(begin);
     return 0;
 }
