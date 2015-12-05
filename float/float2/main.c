@@ -13,38 +13,56 @@ union Def
     struct Number numb;
 };
 
-void output (union Def defenition)
+void beautyprint (int s, int m, int e)
 {
-
-    if (defenition.numb.e == 255 && defenition.numb.m > 0)
+    int i;
+    if (e == 255 && m != 0)
     {
-        printf("NaN");
+        printf("NaN\n");
         return;
     }
 
-    if (defenition.numb.e == 255 && defenition.numb.m == 0)
+    if (e == 255 && m == 0)
     {
-        if (defenition.numb.s == 1)
+        if (s == 1)
         {
-            printf("-inf");
+            printf("-inf\n");
         }
         else
         {
-            printf("+inf");
+            printf("+inf\n");
         }
         return;
     }
 
 
-     printf("(-1)^%d * 1.%d * 2 ^ %d ", defenition.numb.s, defenition.numb.m, (defenition.numb.e - 127));
+    printf("(-1)^%d * 1.", s);
+    for (i = 32 - 9 - 1; i > 1 ; i--)
+    {
+        printf("%d", (m >> i) & 1);
+    }
+    printf(" * 2 ^ %d\n", e - 127);
 }
+
+void output (union Def defenition)
+{
+    int e, m, s;
+    m = defenition.numb.m;
+    e = defenition.numb.e;
+    s = defenition.numb.s;
+    beautyprint(s, m, e);
+}
+
 
 int main()
 {
-    union Def defenition;
+    union Def defenition1, defenition2;
 
-    scanf("%f", &defenition.basicnumb);
+    scanf("%f", &defenition1.basicnumb);
+    output(defenition1);
 
-    output(defenition);
+    scanf("%f", &defenition2.basicnumb);
+    defenition2.basicnumb = defenition1.basicnumb / defenition2.basicnumb;
+    output(defenition2);
     return 0;
 }
