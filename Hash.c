@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define HashTableSize 10
+#define HashTableSize 10000
 #define maxlength 20
 typedef struct node
 {
@@ -83,7 +83,7 @@ size_t hashf(char *s)
 	const int magicnumb = 487;
 	while (s[i] != '\0')
 	{
-		h = h * magicnumb + (int)s[i];
+		h = (h * magicnumb) % HashTableSize + (int)s[i];
 		i++;
 	}
 	return (h % HashTableSize);
