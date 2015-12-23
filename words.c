@@ -17,10 +17,47 @@ typedef struct node
 typedef struct HashTable_
 {
 	node1 *hashtab[HashTableSize];
+	size_t(*h)(char *);
 
 } HashTable;
 
-size_t(*h)(char *);
+//////////////////////////
+
+size_t hashf1(char *s)
+{
+	size_t i = 0, h = 0;
+	const int magicnumb = 47;
+	while (s[i] != '\0')
+	{
+		h = h * magicnumb + (unsigned int)s[i];
+		i++;
+	}
+	return (h);
+}
+
+size_t hashf2(char *s)
+{
+	size_t i = 0, h = 0;
+	while (s[i] != '\0')
+	{
+		h = h + (unsigned int)s[i];
+		i++;
+	}
+	return (h);
+}
+
+size_t hashf3(char *s)
+{
+	size_t i = 0, h = 0;
+	const int magicnumb = 47;
+	while (s[i] != '\0')
+	{
+		h = h  + (unsigned int)s[i] * magicnumb;
+		i++;
+	}
+	return (h);
+}
+
 
 /////////////////////////////
 void fillht(HashTable **htab)
@@ -41,8 +78,8 @@ HashTable* create(void)
 		printf("Memory error\n");
 		return NULL;
 	}
+	f->h = hashf1; 
 	fillht(&f);
-
 	return f;
 }
 
@@ -77,42 +114,6 @@ void delht(HashTable **ht)
 	}
 	free(*ht);
 }
-//////////////////////////
-
-size_t hashf1(char *s)
-{
-	size_t i = 0, h = 0;
-	const int magicnumb = 47;
-	while (s[i] != '\0')
-	{
-		h = (h * magicnumb + (int)s[i]) % HashTableSize;
-		i++;
-	}
-	return (h);
-}
-
-size_t hashf2(char *s)
-{
-	size_t i = 0, h = 0;
-	while (s[i] != '\0')
-	{
-		h = (h + (int)s[i]) % HashTableSize;
-		i++;
-	}
-	return (h);
-}
-
-size_t hashf3(char *s)
-{
-	size_t i = 0, h = 0;
-	const int magicnumb = 47;
-	while (s[i] != '\0')
-	{
-		h = (h  + (int)s[i] * magicnumb) % HashTableSize;
-		i++;
-	}
-	return (h);
-}
 
 ///////////////////////////
 
@@ -143,8 +144,7 @@ void add(HashTable **ht, char *s)
 {
 	size_t hash1;
 	int i = 0;
-	h = hashf1;// hashf1-3
-	hash1 = h(s);
+	hash1 = ((*ht)->h(s)) % HashTableSize;
 	node1 *p, *p1;
 	p1 = p = (*ht)->hashtab[hash1];
 
@@ -202,15 +202,15 @@ void findel(HashTable *ht, int key)
 	}
 
 }
-void statistic(HashTable *ht)
+void statistic(HashTable *ht, FILE *FR)
 {
 	int i, nozero = 0, maxl = 0, minl = 350, l = 0, interval;
 	node1 *p;
 
 	if (ht == NULL)
-    {
-        printf("error. haven't got a table\n");
-    }
+	{
+        	fprintf(FR, "error. haven't got a table\n");
+	}
 
 	for (i = 0; i < HashTableSize; i++)
 	{
@@ -240,18 +240,18 @@ void statistic(HashTable *ht)
 		}
 	}
 
-	printf("Not NULL: %d\n", nozero);
+	fprintf(FR, "Not NULL: %d\n", nozero);
 
 	if (nozero == 0)
 	{
-		printf("Error.\n");
+		fprintf("Error.\n");
 	}
 	else
 	{
-	    printf("Max length: %d\n", maxl);
-        printf("Min length: %d\n", minl);
-		printf("Medium length: %d\n", l / HashTableSize);
-        printf("Total length: %d\n", l);
+		fprintf(FR, "Max length: %d\n", maxl);
+		fprintf(FR, "Min length: %d\n", minl);
+		fprintf(FR, "Medium length: %d\n", l / HashTableSize);
+		fprintf(FR, "Total length: %d\n", l);
 	}
 
 }
@@ -274,7 +274,7 @@ int main()
     HashTable *htable;
     htable = NULL;
     FILE *fo, *fr;
-    fo = fopen("text.txt", "r");
+    fo = fopen("The_Picture_of_Dorian_Gray.txt", "r");
     char s[maxlength], c;
     int i = 0;
     time_t start = clock();
@@ -325,6 +325,7 @@ int main()
     if (fr)
     {
         fprintf(fr, "%fl\n", (double) (clock() - start) / CLOCKS_PER_SEC);
+        statistic(htable, fr);
     }
 
     fclose(fo);
