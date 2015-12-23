@@ -14,10 +14,21 @@ typedef struct node
 typedef struct HashTable_
 {
 	node1 *hashtab[HashTableSize];
-
+	size_t(*h)(char *);
 } HashTable;
 
-size_t(*h)(char *);
+//////////////////////////
+size_t hashf(char *s)
+{
+	size_t i = 0, h = 0;
+	const int magicnumb = 487;
+	while (s[i] != '\0')
+	{
+		h = (h * magicnumb)+ (unsigned int)s[i];
+		i++;
+	}
+	return (h);
+}
 
 /////////////////////ht functions
 
@@ -39,6 +50,7 @@ HashTable* create(void)
 		printf("Memory error\n");
 		return NULL;
 	}
+	f->h = hashf; 
 	fillht(&f);
 
 	return f;
@@ -76,18 +88,6 @@ void delht(HashTable **ht)
 	}
 	free(*ht);
 }
-//////////////////////////
-size_t hashf(char *s)
-{
-	size_t i = 0, h = 0;
-	const int magicnumb = 487;
-	while (s[i] != '\0')
-	{
-		h = (h * magicnumb) % HashTableSize + (int)s[i];
-		i++;
-	}
-	return (h % HashTableSize);
-}
 
 ///////////////////////////another
 void newel(node1 **p, char *s)
@@ -117,8 +117,7 @@ void add(HashTable **ht, char *s)
 {
 	size_t hash1;
 	int i = 0;
-	h = hashf;
-	hash1 = h(s);
+	hash1 = ((*ht) -> h(s)) % HashTableSize;
 	node1 *p, *p1;
 	p1 = p = (*ht)->hashtab[hash1];
 
@@ -152,9 +151,8 @@ void add(HashTable **ht, char *s)
 
 void del(HashTable **ht, char *s)
 {
-	int p;
-	h = hashf;
-	p = h(s);
+	size_t p;
+	p = ((*ht) -> h(s)) % HashTableSize;
 	if ((*ht)->hashtab[p] == NULL)
 	{
 		printf("Error. No elements.\n");
@@ -178,7 +176,7 @@ void output(node1 *head)
 	printf("\n");
 }
 
-void findel(HashTable *ht, int key)
+void findel(HashTable *ht, size_t key)
 {
 	if (ht->hashtab[key] == NULL)
 	{
@@ -192,7 +190,7 @@ void findel(HashTable *ht, int key)
 }
 void statistic(HashTable *ht)
 {
-	int i, nozero = 0, maxl = 0, minl = 350, l = 0, interval;
+	int i, nozero = 0, maxl = 0, minl = 3000, l = 0, interval;
 	node1 *p;
 
 	if (ht == NULL)
@@ -237,9 +235,9 @@ void statistic(HashTable *ht)
 	else
 	{
 	    printf("Max length: %d\n", maxl);
-        printf("Min length: %d\n", minl);
-		printf("Medium length: %d\n", l / HashTableSize);
-        printf("Total length: %d\n", l);
+            printf("Min length: %d\n", minl);
+            printf("Medium length: %d\n", l / HashTableSize);
+            printf("Total length: %d\n", l);
 	}
 
 }
@@ -307,7 +305,6 @@ int main()
 	} while (test != 'e');
 
 	delht(&ht);
-
 
 	return 0;
 }
