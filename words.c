@@ -320,14 +320,14 @@ int main()
         s[i] = '\0';
         add(&htable, s);
     }
-    delht(&htable);
+   
     fr = fopen("text1.txt", "wt");
     if (fr)
     {
         fprintf(fr, "%fl\n", (double) (clock() - start) / CLOCKS_PER_SEC);
         statistic(htable, fr);
     }
-
+    delht(&htable);
     fclose(fo);
     fclose(fr);
 
