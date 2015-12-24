@@ -58,6 +58,10 @@ size_t hashf3(char *s)
 	return (h);
 }
 
+size_t hashf4(char *s)
+{
+	return 478;
+}
 
 /////////////////////////////
 void fillht(HashTable **htab)
