@@ -58,6 +58,9 @@ enum common_type
 */
 
 size_t massize = 1024 * 256;
+int codesize = 10000;
+int lenofstring = 35;
+int lenofcomand = 13;
 
 int main()
 {
@@ -74,10 +77,10 @@ int main()
 	}
 	data = (long int*)malloc(massize * sizeof(long int));
 	stack = (long int*)malloc(massize * sizeof(long int));
-	code = (instruction*)malloc(10000 * sizeof(instruction));
-	marks = (label*)malloc(10000 * sizeof(label));
+	code = (instruction*)malloc(codesize * sizeof(instruction));
+	marks = (label*)malloc(codesize * sizeof(label));
 
-	char s[35], comand[13];
+	char s[lenofstring], comand[lenofcomand];
 	int l = 0, i, instnumb = 0, marknumb = 0, length;
 	int k;
 	for (i = 0; i < massize; i++)
@@ -86,7 +89,7 @@ int main()
 		stack[i] = 0;
 	}
 
-	fgets(s, 35, fo);
+	fgets(s, lenofstring, fo);
 	
 	while (!feof(fo)) 
 	{
@@ -220,10 +223,11 @@ int main()
 		}
 
 		instnumb++;
-		fgets(s, 35, fo);
+		fgets(s, lenofstring, fo);
 
 	}
 
+	fclose(fo);
 
 	bool stop = false;
 	bool error = false;
@@ -357,7 +361,6 @@ int main()
 	free(stack);
 	free(code);
 	free(marks);
-	fclose(fo);
 
 	return 0;
 }
