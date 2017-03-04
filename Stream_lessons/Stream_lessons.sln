@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stream_lessons.Plugins", "Stream_lessons.Plugins.csproj", "{6165A98B-DAFA-B99B-2321-B305A6B3849D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stream_lessons", "Stream_lessons.csproj", "{032DCBFA-2541-1097-B1D6-157FD924B47B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stream_lessons.Editor.Plugins", "Stream_lessons.Editor.Plugins.csproj", "{FA93A541-F97C-81DB-80A5-76BCF9A7D0A7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6165A98B-DAFA-B99B-2321-B305A6B3849D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6165A98B-DAFA-B99B-2321-B305A6B3849D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6165A98B-DAFA-B99B-2321-B305A6B3849D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6165A98B-DAFA-B99B-2321-B305A6B3849D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{032DCBFA-2541-1097-B1D6-157FD924B47B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{032DCBFA-2541-1097-B1D6-157FD924B47B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{032DCBFA-2541-1097-B1D6-157FD924B47B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{032DCBFA-2541-1097-B1D6-157FD924B47B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA93A541-F97C-81DB-80A5-76BCF9A7D0A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA93A541-F97C-81DB-80A5-76BCF9A7D0A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA93A541-F97C-81DB-80A5-76BCF9A7D0A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA93A541-F97C-81DB-80A5-76BCF9A7D0A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
