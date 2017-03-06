@@ -86,12 +86,13 @@
     <Compile Include="Assets\Scripts\Inventory\Drag.cs" />
     <Compile Include="Assets\Scripts\Inventory\Drop.cs" />
     <Compile Include="Assets\Scripts\Inventory\Food.cs" />
+    <Compile Include="Assets\Scripts\Inventory\InventWeapon.cs" />
     <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\Inventory\InventoryItem.cs" />
-    <Compile Include="Assets\Scripts\Inventory\InventWeapon.cs" />
     <Compile Include="Assets\Scripts\Inventory\Item.cs" />
     <Compile Include="Assets\Scripts\Inventory\Jewellery.cs" />
     <Compile Include="Assets\Scripts\Inventory\Letters.cs" />
+    <Compile Include="Assets\Scripts\Inventory\MouseReaction.cs" />
     <Compile Include="Assets\Scripts\Inventory\Weapon.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -11,11 +11,7 @@ public class Weapon : Item
         
     }
 
-    public void Take()
-    {
-        
-    }
-
+    
     public void Remove()
     {
         

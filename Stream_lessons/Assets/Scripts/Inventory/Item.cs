@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item: MonoBehaviour
+public abstract class Item: MonoBehaviour
 {
     public string Name;
+    public uint ID;
     public string Description;
     public string Sprite;
     public string Prefab;
@@ -12,8 +13,20 @@ public class Item: MonoBehaviour
 
     public void Explore(GameObject obj)
     {
-
+       //sound
     }
-    
 
+
+
+    void OnMouseEnter()
+    {
+
+        
+    
+    }
+
+    void OnMouseExit()
+    {
+        
+    }
 }

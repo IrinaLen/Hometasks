@@ -6,6 +6,7 @@ public class InventoryItem : Item
 {
     public bool IsWeapon;
 
+
     public void Remove(InventoryItem item, GameObject obj, List<InventoryItem> itemList)
     {
         GameObject newObj = Instantiate<GameObject>(Resources.Load<GameObject>(item.Prefab));
@@ -13,11 +14,7 @@ public class InventoryItem : Item
         Destroy(obj);
         itemList.Remove(item);
     }
-
-    public void Take()
-    {
-        
-    }
+    
 }
 
    
