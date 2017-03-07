@@ -17,12 +17,14 @@ public class Inventory : MonoBehaviour
     private int numberOfItems;
     private List<InventoryItem> itemList;
     private Weapon weaponInSlot;
+    private bool isWeaponHere;
 
 
     void Start ()
 	{
 	    itemList = new List<InventoryItem>();
 	    numberOfItems = InventorySlots.transform.childCount;
+	    isWeaponHere = false;
 	}
 	
 	void Update ()
@@ -38,8 +40,17 @@ public class Inventory : MonoBehaviour
                 {
                     if (item.IsWeapolOnly)
                     {
-                        weaponInSlot = hit.collider.GetComponent<Weapon>();
-                        Destroy(hit.collider.gameObject);
+                        if (weaponInSlot != null)
+                        {
+                            //diolog window...
+                        }
+                        else
+                        {
+                            weaponInSlot = hit.collider.GetComponent<Weapon>();
+                            isWeaponHere = true;
+                            Destroy(hit.collider.gameObject);
+                        }
+                        
                     }
                     else
                     {
@@ -47,6 +58,10 @@ public class Inventory : MonoBehaviour
                         {
                             itemList.Add(hit.collider.GetComponent<InventoryItem>());
                             Destroy(hit.collider.gameObject);
+                        }
+                        else
+                        {
+                            //error sound
                         }
                     }
                 }
@@ -75,13 +90,13 @@ public class Inventory : MonoBehaviour
             else
             {
                 PesonPanel.SetActive(true);
-                if (WeaponSlot.transform.childCount == 0 && weaponInSlot != null)
+
+                if (isWeaponHere)
                 {
                     GameObject img = Instantiate(WeaponContainer);
                     img.transform.SetParent(WeaponSlot.transform);
                     img.GetComponent<Image>().sprite = Resources.Load<Sprite>(weaponInSlot.Sprite);
                     img.transform.GetChild(0).transform.GetChild(0).transform.GetComponent<Text>().text = weaponInSlot.Description;
-
                 }
 
                 InventorySlots.SetActive(true);
@@ -89,7 +104,7 @@ public class Inventory : MonoBehaviour
                 for (int i = 0; i < count; i++)
                 {
                     InventoryItem it = itemList[i];
-                    if (InventorySlots.transform.childCount >= i)
+                    if (InventorySlots.transform.childCount >= i) // потом не понадобится
                     {
                         GameObject img = Instantiate(Container);
                         img.transform.SetParent(InventorySlots.transform.GetChild(i).transform);

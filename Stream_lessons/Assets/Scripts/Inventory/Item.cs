@@ -16,17 +16,5 @@ public abstract class Item: MonoBehaviour
        //sound
     }
 
-
-
-    void OnMouseEnter()
-    {
-
-        
     
-    }
-
-    void OnMouseExit()
-    {
-        
-    }
 }

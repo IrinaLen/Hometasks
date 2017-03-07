@@ -5,7 +5,7 @@ using UnityEngine;
 public class InventoryItem : Item
 {
     public bool IsWeapon;
-
+  
 
     public void Remove(InventoryItem item, GameObject obj, List<InventoryItem> itemList)
     {
