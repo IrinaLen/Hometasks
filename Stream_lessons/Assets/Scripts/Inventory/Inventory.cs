@@ -38,7 +38,7 @@ public class Inventory : MonoBehaviour
                 Item item = hit.collider.GetComponent<Item>();
                 if (item != null)
                 {
-                    if (item.IsWeapolOnly)
+                    if (item.IsWeaponOnly)
                     {
                         if (weaponInSlot != null)
                         {
@@ -96,7 +96,7 @@ public class Inventory : MonoBehaviour
                     GameObject img = Instantiate(WeaponContainer);
                     img.transform.SetParent(WeaponSlot.transform);
                     img.GetComponent<Image>().sprite = Resources.Load<Sprite>(weaponInSlot.Sprite);
-                    img.transform.GetChild(0).transform.GetChild(0).transform.GetComponent<Text>().text = weaponInSlot.Description;
+                    img.GetComponent<MouseReaction>().ItemHere = weaponInSlot;
                 }
 
                 InventorySlots.SetActive(true);
@@ -109,7 +109,7 @@ public class Inventory : MonoBehaviour
                         GameObject img = Instantiate(Container);
                         img.transform.SetParent(InventorySlots.transform.GetChild(i).transform);
                         img.GetComponent<Image>().sprite = Resources.Load<Sprite>(it.Sprite);
-                        img.transform.GetChild(0).transform.GetChild(0).transform.GetComponent<Text>().text = itemList[i].Description;
+                        img.GetComponent<MouseReaction>().ItemHere = it;
                     }
                     else
                     {

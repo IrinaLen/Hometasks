@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class Food : InventoryItem
 {
+
     public void Eat()
     {
         

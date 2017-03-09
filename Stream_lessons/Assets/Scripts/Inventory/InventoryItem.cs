@@ -5,8 +5,12 @@ using UnityEngine;
 public class InventoryItem : Item
 {
     public bool IsWeapon;
-  
 
+    public InventoryItem()
+    {
+        FunctionsList.Add("explore");
+        FunctionsList.Add("Remove");
+    }
     public void Remove(InventoryItem item, GameObject obj, List<InventoryItem> itemList)
     {
         GameObject newObj = Instantiate<GameObject>(Resources.Load<GameObject>(item.Prefab));

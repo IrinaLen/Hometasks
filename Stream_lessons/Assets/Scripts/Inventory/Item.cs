@@ -9,7 +9,10 @@ public abstract class Item: MonoBehaviour
     public string Description;
     public string Sprite;
     public string Prefab;
-    public bool IsWeapolOnly;
+    public bool IsWeaponOnly;
+    public List<string> FunctionsList;
+
+
 
     public void Explore(GameObject obj)
     {
