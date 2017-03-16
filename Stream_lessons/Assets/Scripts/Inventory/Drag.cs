@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler,IEndDragHandl
     // Use this for initialization
     void Start()
     {
-        Canvas = GameObject.Find("Canvas").transform;
+        Canvas = GameObject.Find("InventoryCanvas").transform;
     }
 
     public void OnBeginDrag(PointerEventData eventData)

@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
 
     public GameObject WeaponSlot;//private or public
     public GameObject InventorySlots;
-    public GameObject PesonPanel;
+    public GameObject InventoryCanvas;
     public GameObject Container;
     public GameObject WeaponContainer;
     public GameObject JewelleryContainer;
@@ -48,7 +48,15 @@ public class Inventory : MonoBehaviour
                         {
                             weaponInSlot = hit.collider.GetComponent<Weapon>();
                             isWeaponHere = true;
+                            if (InventoryCanvas.activeSelf)
+                            {
+                                GameObject img = Instantiate(WeaponContainer);
+                                img.transform.SetParent(WeaponSlot.transform);
+                                img.GetComponent<Image>().sprite = Resources.Load<Sprite>(weaponInSlot.Sprite);
+                                img.GetComponent<MouseReaction>().ItemHere = weaponInSlot;
+                            }
                             Destroy(hit.collider.gameObject);
+                           
                         }
                         
                     }
@@ -56,7 +64,19 @@ public class Inventory : MonoBehaviour
                     {
                         if (itemList.Count < numberOfItems)
                         {
-                            itemList.Add(hit.collider.GetComponent<InventoryItem>());
+                            var it = hit.collider.GetComponent<InventoryItem>();
+                            itemList.Add(it);
+                            for (int i = 0; i < InventorySlots.transform.childCount; i++)
+                            {
+                                if (InventorySlots.transform.GetChild(i).transform.childCount == 0)
+                                {
+                                    GameObject img = Instantiate(Container);
+                                    img.transform.SetParent(InventorySlots.transform.GetChild(i).transform);
+                                    img.GetComponent<Image>().sprite = Resources.Load<Sprite>(it.Sprite);
+                                    img.GetComponent<MouseReaction>().ItemHere = it;
+                                    break;
+                                }
+                            }
                             Destroy(hit.collider.gameObject);
                         }
                         else
@@ -70,15 +90,15 @@ public class Inventory : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.I))
         {
-            if (InventorySlots.activeSelf)
+            if (InventoryCanvas.activeSelf)
             {
-                PesonPanel.SetActive(false);
-                // зачем это?
+                InventoryCanvas.SetActive(false);
+
                 if (WeaponSlot.transform.childCount > 0)
                 {
                     Destroy(WeaponSlot.transform.GetChild(0).gameObject);
                 }
-                InventorySlots.SetActive(false);
+
                 for (int i = 0; i < InventorySlots.transform.childCount; i++)
                 {
                     if (InventorySlots.transform.GetChild(i).transform.childCount > 0)
@@ -89,7 +109,7 @@ public class Inventory : MonoBehaviour
             }
             else
             {
-                PesonPanel.SetActive(true);
+                InventoryCanvas.SetActive(true);
 
                 if (isWeaponHere)
                 {
@@ -98,8 +118,6 @@ public class Inventory : MonoBehaviour
                     img.GetComponent<Image>().sprite = Resources.Load<Sprite>(weaponInSlot.Sprite);
                     img.GetComponent<MouseReaction>().ItemHere = weaponInSlot;
                 }
-
-                InventorySlots.SetActive(true);
                 int count = itemList.Count;
                 for (int i = 0; i < count; i++)
                 {
@@ -120,4 +138,30 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+
+
+
+    private void PictureUpdate()
+    {
+        
+        int count = itemList.Count;
+        for (int i = 0; i < count; i++)
+        {
+            InventoryItem it = itemList[i];
+            if (InventorySlots.transform.childCount >= i) // потом не понадобится
+            {
+                GameObject img = Instantiate(Container);
+                img.transform.SetParent(InventorySlots.transform.GetChild(i).transform);
+                img.GetComponent<Image>().sprite = Resources.Load<Sprite>(it.Sprite);
+                img.GetComponent<MouseReaction>().ItemHere = it;
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
 }
+
+
+

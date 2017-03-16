@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Jewellery : InventoryItem
 {
-    public Jewellery()
+    void Start()
     {
         FunctionsList.Add("putOn");
     }

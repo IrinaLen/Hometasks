@@ -6,6 +6,11 @@ using UnityEngine;
 
 public class Weapon : Item
 {
+    void Start()
+    {
+        MoveDescriptWindow = new Vector3(-95f, 0, 0);
+    }
+
     public void TakeToHand()
     {
         
