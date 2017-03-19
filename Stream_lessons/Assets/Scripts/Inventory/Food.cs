@@ -7,11 +7,7 @@ using UnityEngine;
 
 public class Food : InventoryItem
 {
-    void Start()
-    {
-        FunctionsList.Add("eat");
-    }
-
+  
     public void Eat()
     {
         

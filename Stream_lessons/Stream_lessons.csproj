@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.5.2f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -82,12 +84,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Inventory\Chest.cs" />
+    <Compile Include="Assets\Scripts\Inventory\ChestDrop.cs" />
+    <Compile Include="Assets\Scripts\Inventory\ChestSender.cs" />
     <Compile Include="Assets\Scripts\Inventory\Coin.cs" />
     <Compile Include="Assets\Scripts\Inventory\Drag.cs" />
-    <Compile Include="Assets\Scripts\Inventory\Drop.cs" />
     <Compile Include="Assets\Scripts\Inventory\Food.cs" />
     <Compile Include="Assets\Scripts\Inventory\InventWeapon.cs" />
     <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
+    <Compile Include="Assets\Scripts\Inventory\ButtonReaction.cs" />
+    <Compile Include="Assets\Scripts\Inventory\InventoryDrop.cs" />
     <Compile Include="Assets\Scripts\Inventory\InventoryItem.cs" />
     <Compile Include="Assets\Scripts\Inventory\Item.cs" />
     <Compile Include="Assets\Scripts\Inventory\Jewellery.cs" />
@@ -95,6 +100,7 @@
     <Compile Include="Assets\Scripts\Inventory\Money.cs" />
     <Compile Include="Assets\Scripts\Inventory\MouseReaction.cs" />
     <Compile Include="Assets\Scripts\Inventory\Weapon.cs" />
+    <Compile Include="Assets\Scripts\Inventory\WeaponDrop.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />

@@ -10,7 +10,8 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler,IEndDragHandl
     public Transform Canvas;
     public Transform Old;
 
-    // Use this for initialization
+    public bool fromChest = false;
+
     void Start()
     {
         Canvas = GameObject.Find("InventoryCanvas").transform;
@@ -20,6 +21,10 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler,IEndDragHandl
     {
         Old = transform.parent;
         transform.SetParent(Canvas);
+        if (transform.childCount > 0)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
         GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 
@@ -34,6 +39,10 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler,IEndDragHandl
         if (transform.parent == Canvas)
         {
             transform.SetParent(Old);
+            if (fromChest)
+            {
+                transform.GetChild(0).transform.gameObject.SetActive(true);
+            }
         }
     }
 

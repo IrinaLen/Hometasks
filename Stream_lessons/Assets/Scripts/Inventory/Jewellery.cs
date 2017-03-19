@@ -6,12 +6,13 @@ using UnityEngine;
 
 public class Jewellery : InventoryItem
 {
-    void Start()
+    
+    public void PutOn()
     {
-        FunctionsList.Add("putOn");
+        
     }
 
-    public void PutOn()
+    public void PutOff()
     {
         
     }
