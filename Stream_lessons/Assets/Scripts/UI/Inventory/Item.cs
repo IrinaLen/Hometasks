@@ -13,7 +13,7 @@ public abstract class Item : MonoBehaviour
     public List<string> FunctionsList = new List<string>(); //  не стринг а спец класс Action()
     public Vector3 MoveDescriptWindow = new Vector3 (90f, 0, 0);
 
-
+   
     public void GetName()
     {
         //
