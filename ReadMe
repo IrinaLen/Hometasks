@@ -1,20 +1,19 @@
 Открываете в корне разархивированной папки PowerSall и вводите:
 	.\build.ps1
+Далее, перейти в папку .\Grammar\Grammar\bin\Release
 
 Для запуска одного из тестов в командную строку ввести одну из следующих строчек:
-		\Grammar\Grammar\bin\Release\Grammar -bigT -matrix
-		\Grammar\Grammar\bin\Release\Grammar -bigT -GLL
-		\Grammar\Grammar\bin\Release\Grammar -bigT -union
+		.\Grammar -bigT -matrix
+		.\Grammar -bigT -GLL
+		.\Grammar -bigT -union
 
-		\Grammar\Grammar\bin\Release\Grammar -smallT -matrix
-		\Grammar\Grammar\bin\Release\Grammar -smallT -GLL
-		\Grammar\Grammar\bin\Release\Grammar -smallT -union
+		.\Grammar -smallT -matrix
+		.\Grammar -smallT -GLL
+		.\Grammar -smallT -union
 
 (Результат работы первых 3-x - будут файлы (папка Grammar\Grammar\data\results) с матрицей контрольных чисел для больших тестов и папкой с файлами со всеми путями)
-
-
 Для работы с произвольными файлами файлами ввести
-		\Grammar\Grammar\bin\Release\Grammar
+		.\Grammar
 
 
 
