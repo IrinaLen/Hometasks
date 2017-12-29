@@ -288,7 +288,7 @@ namespace Grammar
             {
                 foreach (var g in grammars)
                 {
-                    Console.Write(a + " " + g + "\t");
+                    Console.Write(a + " " + g + "\n");
                     var paths = new MatrixAlgorithm(@"..\..\data\grammars\" + g, @"..\..\data\automats\" + a);
                     PrintPaths(paths.ReturnPaths());
                 }
@@ -320,7 +320,7 @@ namespace Grammar
             {
                 foreach (var g in grammars)
                 {
-                    Console.Write(a + " " + g + "\t");
+                    Console.Write(a + " " + g + "\n");
                     var paths = new GLLAlgorithm(@"..\..\data\grammars\" + g, @"..\..\data\automats\" + a);
                     PrintPaths(paths.ReturnPaths());
                 }
@@ -351,7 +351,7 @@ namespace Grammar
             {
                 foreach (var g in grammars)
                 {
-                    Console.Write(a + " " + g + "\t");
+                    Console.Write(a + " " + g + "\n");
                     var paths = new UnionAutomats(@"..\..\data\grammars\" + g, @"..\..\data\automats\" + a);
                     PrintPaths(paths.ReturnPaths());
                 }
