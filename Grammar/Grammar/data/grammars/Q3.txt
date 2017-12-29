@@ -1,0 +1,15 @@
+S : X3 S1
+S1 : S X4 
+S : X1 S2
+S2 : S X2
+S : X3 B1
+B1 : B X4
+S : X1 B2
+B2 : B X2
+B : X5 B
+B : 5
+X1 : 1
+X2 : 2
+X3 : 3
+X4 : 4
+X5 : 5

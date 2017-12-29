@@ -1,0 +1,5 @@
+﻿digraph aut {
+ 0; 1; 
+ 0 -> 1[label="n"]
+ 1 -> 0[label="+"]
+}

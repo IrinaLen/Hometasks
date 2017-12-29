@@ -1,0 +1,38 @@
+Открываете в корне разархивированной папки PowerSall и вводите:
+	.\build.ps1
+
+Для запуска одного из тестов в командную строку ввести одну из следующих строчек:
+		\Grammar\Grammar\bin\Release\Grammar -bigT -matrix
+		\Grammar\Grammar\bin\Release\Grammar -bigT -GLL
+		\Grammar\Grammar\bin\Release\Grammar -bigT -union
+
+		\Grammar\Grammar\bin\Release\Grammar -smallT -matrix
+		\Grammar\Grammar\bin\Release\Grammar -smallT -GLL
+		\Grammar\Grammar\bin\Release\Grammar -smallT -union
+
+(Результат работы первых 3-x - будут файлы (папка Grammar\Grammar\data\results) с матрицей контрольных чисел для больших тестов и папкой с файлами со всеми путями)
+
+
+Для работы с произвольными файлами файлами ввести
+		\Grammar\Grammar\bin\Release\Grammar
+
+
+
+
+
+Если при сборке возникает ошибка такого типа: 
+.\build.ps1 : Невозможно загрузить файл D:\University\Programming\Cake\build.ps1, так как выполнение сценариев отключен о в этой системе. Для получения дополнительных сведений см. about_Execution_Policies по адресу http://go.microsoft.com/fwlink/?LinkID=135170.
+строка:1 знак:1
++ .\build.ps1
++ ~~~~~~~~~~~
+    + CategoryInfo          : Ошибка безопасности: (:) [], PSSecurityException
+    + FullyQualifiedErrorId : UnauthorizedAccess
+
+То решение такое: 
+
+1) Запустить редактор локальной групповой политики (Нажмите кнопку Пуск, введите gpedit.msc в поле Начать поиск, а затем нажмите клавишу ВВОД)
+
+2) Зашйти в раздел: Политика "Локальный компьютер"\Конфигурация компьютера\Административные шаблоны\Компоненты Windows\Windows PowerShell\
+
+3) Если параметр "Включить выполнение сценариев" был установлен на "Не задана", поменять на "Включено" (параметры: "Разрешить локальные сценарии и удаленные подписаннве сценарии")
+

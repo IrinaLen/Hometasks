@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{215DC1DB-13A4-470F-9FA4-83369A6E43A8}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Grammar</RootNamespace>
+    <AssemblyName>Grammar</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="DotParser, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotParser.1.0.6\lib\net45\DotParser.dll</HintPath>
+    </Reference>
+    <Reference Include="FSharp.Core, Version=4.4.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FSharp.Core.4.2.3\lib\net45\FSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FSharpx.Collections, Version=1.17.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FSharpx.Collections.1.17.0\lib\net40\FSharpx.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="FSharpx.Collections.Experimental, Version=1.17.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FSharpx.Collections.Experimental.1.17.0\lib\net40\FSharpx.Collections.Experimental.dll</HintPath>
+    </Reference>
+    <Reference Include="FSharpx.Core, Version=1.8.32.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FSharpx.Core.1.8.32\lib\40\FSharpx.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Graphviz4Net, Version=2.0.33.0, Culture=neutral, PublicKeyToken=4b46ae066952113a, processorArchitecture=MSIL">
+      <HintPath>..\packages\GraphViz4Net.2.0.33\lib\net45\Graphviz4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="YC.QuickGraph, Version=3.7.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YC.QuickGraph.3.7.3\lib\net45\YC.QuickGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="YC.QuickGraph.Data, Version=3.7.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YC.QuickGraph.3.7.3\lib\net45\YC.QuickGraph.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="YC.QuickGraph.FSA, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YC.QuickGraph.3.7.3\lib\net45\YC.QuickGraph.FSA.dll</HintPath>
+    </Reference>
+    <Reference Include="YC.QuickGraph.FST, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YC.QuickGraph.3.7.3\lib\net45\YC.QuickGraph.FST.dll</HintPath>
+    </Reference>
+    <Reference Include="YC.QuickGraph.Glee, Version=3.7.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YC.QuickGraph.3.7.3\lib\net45\YC.QuickGraph.Glee.dll</HintPath>
+    </Reference>
+    <Reference Include="YC.QuickGraph.Graphviz, Version=3.7.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YC.QuickGraph.3.7.3\lib\net45\YC.QuickGraph.Graphviz.dll</HintPath>
+    </Reference>
+    <Reference Include="YC.QuickGraph.Petri, Version=3.7.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YC.QuickGraph.3.7.3\lib\net45\YC.QuickGraph.Petri.dll</HintPath>
+    </Reference>
+    <Reference Include="YC.QuickGraphFS, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YC.QuickGraph.3.7.3\lib\net45\YC.QuickGraphFS.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GLLAlgorithm.cs" />
+    <Compile Include="MatrixAlgorithm.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnionAutomats.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="data\automats\atom-primitive.dot" />
+    <None Include="data\automats\biomedical-mesure-primitive.dot" />
+    <None Include="data\automats\foaf.dot" />
+    <None Include="data\automats\funding.dot" />
+    <None Include="data\automats\generations.dot" />
+    <None Include="data\automats\people-pets.dot" />
+    <None Include="data\automats\pizza.dot" />
+    <None Include="data\automats\skos.dot" />
+    <None Include="data\automats\t1.dot" />
+    <None Include="data\automats\t5.dot" />
+    <None Include="data\automats\t4.dot" />
+    <None Include="data\automats\t3.dot" />
+    <None Include="data\automats\t2.dot" />
+    <None Include="data\automats\travel.dot" />
+    <None Include="data\automats\univ-bench.dot" />
+    <None Include="data\automats\wine.dot" />
+    <None Include="data\grammars\Q1.dot" />
+    <None Include="data\grammars\Q2.dot" />
+    <None Include="data\grammars\Q3.dot" />
+    <Content Include="data\grammars\t1.txt" />
+    <None Include="data\grammars\t1g.dot" />
+    <Content Include="data\grammars\t2.txt" />
+    <None Include="data\grammars\t2g.dot" />
+    <Content Include="data\grammars\t3.txt" />
+    <None Include="data\grammars\t3g.dot" />
+    <Content Include="data\grammars\t4.txt" />
+    <None Include="data\grammars\t4g.dot" />
+    <Content Include="data\grammars\t5.txt" />
+    <None Include="data\grammars\t5g.dot" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="data\grammars\Q1.txt" />
+    <Content Include="data\grammars\Q2.txt" />
+    <Content Include="data\grammars\Q3.txt" />
+    <Content Include="data\TestDataSets.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="data\results\GLL\" />
+    <Folder Include="data\results\matrix\" />
+    <Folder Include="data\results\union\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

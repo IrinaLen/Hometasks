@@ -1,0 +1,4 @@
+﻿Digraph aut { 
+  0 -> 0 [label="a"]
+  0 -> 0 [label="b"]
+}
