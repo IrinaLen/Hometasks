@@ -1,0 +1,14 @@
+﻿digraph gr {
+0[label="S", color="green"];
+1;
+2[label="S",shape="doublecircle"];
+3[label="S",shape="doublecircle"];
+4;5;
+
+0 -> 1 [label = "S"];
+1 -> 2 [label = "S"];
+0 -> 4 [label = "a"];
+4 -> 5 [label = "S"];
+5 -> 3 [label = "b"];
+4 -> 3 [label = "b"];
+}

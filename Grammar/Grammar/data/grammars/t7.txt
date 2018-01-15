@@ -1,0 +1,6 @@
+﻿S : S S
+S : A S1
+S1 : S B
+S : eps
+A : a
+B : b
