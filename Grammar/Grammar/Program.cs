@@ -11,6 +11,8 @@ namespace Grammar
 {
     class Program
     {
+    	private const int N = 8;//количество тестов
+
         static void Main(string[] args)
         {
             if (args.Length > 0 && args.Length < 2 || args.Length > 2)
@@ -20,6 +22,7 @@ namespace Grammar
             }
             if (args.Length == 2)
             {
+
                 if (args[0].ToLower() == "-bigt")
                 {
                     if (args[1].ToLower() == "-matrix")
@@ -72,6 +75,7 @@ namespace Grammar
                     return;
                 }
             }
+
 
             string autPath = "", gramPath = "", resultPath = "";
             Console.WriteLine("Regular expression automat file path:");
@@ -263,99 +267,44 @@ namespace Grammar
             }
         }
 
+
         //SmallTests
         private static void SmallTestsMatrix()
         {
-            string[] automats =
+            for (int i = 1; i <= N; i++)
             {
-                "t1.dot",
-                "t2.dot",
-                "t3.dot",
-                "t4.dot",
-                "t5.dot"
-            };
-
-            string[] grammars =
-            {
-                "t1.txt",
-                "t2.txt",
-                "t3.txt",
-                "t4.txt",
-                "t5.txt"
-            };
-
-            foreach (var a in automats)
-            {
-                foreach (var g in grammars)
-                {
-                    Console.Write(a + " " + g + "\n");
-                    var paths = new MatrixAlgorithm(@"..\..\data\grammars\" + g, @"..\..\data\automats\" + a);
-                    PrintPaths(paths.ReturnPaths());
-                }
+                string a = "t" + i.ToString() + ".dot";
+                string g = "t" + i.ToString() + ".txt";
+                Console.Write(a + " " + g + "\t");
+                var paths = new MatrixAlgorithm(@"..\..\data\grammars\" + g, @"..\..\data\automats\" + a);
+                PrintPaths(paths.ReturnPaths());
             }
-
         }
 
         private static void SmallTestsGLL()
         {
-            string[] automats =
+            for (int i = 1; i <= N; i++)
             {
-                "t1.dot",
-                "t2.dot",
-                "t3.dot",
-                "t4.dot",
-                "t5.dot"
-            };
-
-            string[] grammars =
-            {
-                "t1g.dot",
-                "t2g.dot",
-                "t3g.dot",
-                "t4g.dot",
-                "t5g.dot"
-            };
-
-            foreach (var a in automats)
-            {
-                foreach (var g in grammars)
-                {
-                    Console.Write(a + " " + g + "\n");
-                    var paths = new GLLAlgorithm(@"..\..\data\grammars\" + g, @"..\..\data\automats\" + a);
-                    PrintPaths(paths.ReturnPaths());
-                }
+                string a = "t" + i.ToString() + ".dot";               
+                string g = "t" + i.ToString() + "g.dot";
+                Console.Write(a + " " + g + "\t");
+                var paths = new GLLAlgorithm(@"..\..\data\grammars\" + g, @"..\..\data\automats\" + a);
+                PrintPaths(paths.ReturnPaths());
             }
         }
 
         private static void SmallTestsUnion()
         {
-            string[] automats =
+            for (int i = 1; i <= N; i++)
             {
-                "t1.dot",
-                "t2.dot",
-                "t3.dot",
-                "t4.dot",
-                "t5.dot"
-            };
+                string a = "t" + i.ToString() + ".dot";
+                string g = "t" + i.ToString() + "g.dot";
 
-            string[] grammars =
-            {
-                "t1g.dot",
-                "t2g.dot",
-                "t3g.dot",
-                "t4g.dot",
-                "t5g.dot"
-            };
-
-            foreach (var a in automats)
-            {
-                foreach (var g in grammars)
-                {
-                    Console.Write(a + " " + g + "\n");
-                    var paths = new UnionAutomats(@"..\..\data\grammars\" + g, @"..\..\data\automats\" + a);
-                    PrintPaths(paths.ReturnPaths());
-                }
+                Console.Write(a + " " + g + "\t");
+                var paths = new UnionAutomats(@"..\..\data\grammars\" + g, @"..\..\data\automats\" + a);
+                PrintPaths(paths.ReturnPaths());
             }
+
         }
         private static void PrintPaths(List<string> paths)
         {
