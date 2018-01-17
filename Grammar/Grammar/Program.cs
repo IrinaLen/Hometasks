@@ -85,7 +85,7 @@ namespace Grammar
                 algoType = Console.ReadLine();
                 algoType = algoType.ToLower();
 
-                while (algoType != "matrix" || algoType != "gll" || algoType != "union")
+                while (algoType != "matrix" && algoType != "gll" && algoType != "union")
                 {
                     Console.WriteLine("Not existed type. Try again...");
                     algoType = Console.ReadLine();
