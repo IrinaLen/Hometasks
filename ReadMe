@@ -14,6 +14,11 @@
 (Результат работы первых 3-x - будут файлы (папка Grammar\Grammar\data\results) с матрицей контрольных чисел для больших тестов и папкой с файлами со всеми путями)
 Для работы с произвольными файлами файлами ввести
 		.\Grammar
+		или
+		.\Grammar matrix regular.dot grammar.txt result.txt
+		.\Grammar union regular.dot grammar.dot result.txt
+		.\Grammar gll regular.dot grammar.dot result.txt
+
 
 
 

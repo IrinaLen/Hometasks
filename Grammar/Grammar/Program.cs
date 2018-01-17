@@ -11,19 +11,18 @@ namespace Grammar
 {
     class Program
     {
-    	private const int N = 8;//количество тестов
+        private const int N = 8; //количество тестов
 
         static void Main(string[] args)
         {
-            if (args.Length > 0 && args.Length < 2 || args.Length > 2)
+            if (args.Length == 1 || args.Length > 4)
             {
                 Console.WriteLine("Invalid number of arguments. Try again.");
                 return;
             }
             if (args.Length == 2)
             {
-
-                if (args[0].ToLower() == "-bigt")
+                if (args[0] == "-bigT")
                 {
                     if (args[1].ToLower() == "-matrix")
                     {
@@ -77,63 +76,98 @@ namespace Grammar
             }
 
 
-            string autPath = "", gramPath = "", resultPath = "";
-            Console.WriteLine("Regular expression automat file path:");
+
+            string algoType = "", autPath = "", gramPath = "", resultPath = "";
+
+            if (args.Length == 0)
+            {
+                Console.WriteLine("Input algorithm name: Matrix, GLL, Union");
+                algoType = Console.ReadLine();
+                algoType = algoType.ToLower();
+
+                while (algoType != "matrix" || algoType != "gll" || algoType != "union")
+                {
+                    Console.WriteLine("Not existed type. Try again...");
+                    algoType = Console.ReadLine();
+                    algoType = algoType.ToLower();
+                }
+
+
+                Console.WriteLine("Regular expression automat file path:");
 
                 autPath = Console.ReadLine();
-                while (!File.Exists(autPath)) 
+                while (!File.Exists(autPath))
                 {
                     Console.WriteLine("Not existed file. Try again...");
                     autPath = Console.ReadLine();
                 }
 
-            Console.WriteLine("Grammar file path:");
-            
+                Console.WriteLine("Grammar file path:");
+
                 gramPath = Console.ReadLine();
                 while (!File.Exists(gramPath))
                 {
                     Console.WriteLine("Not existed file. Try again...");
                     gramPath = Console.ReadLine();
                 }
-            Console.WriteLine("Result file path:");
+                Console.WriteLine("Result file path:");
 
-            resultPath = Console.ReadLine();
-            while (resultPath != "" && !File.Exists(gramPath))
-            {
-                Console.WriteLine("Not existed file. Try again...");
                 resultPath = Console.ReadLine();
+                while (resultPath != "" && !File.Exists(gramPath))
+                {
+                    Console.WriteLine("Not existed file. Try again...");
+                    resultPath = Console.ReadLine();
+                }
+            }
+            else
+            {
+                algoType = args[0];
+
+                autPath = args[1];
+                if (!File.Exists(autPath))
+                {
+                    Console.WriteLine("Not existed Regular expression automat file. Try again...");
+                    return;
+                }
+
+                gramPath = args[2];
+                if (!File.Exists(gramPath))
+                {
+                    Console.WriteLine("Not existed Grammar file. Try again...");
+                    return;
+                }
+
+                resultPath = args.Length == 4 ? args[3] : "";
+                if (resultPath != "" && !File.Exists(gramPath))
+                {
+                    Console.WriteLine("Not existed Result file. Try again...");
+                    return;
+                }
+
             }
 
-
-            Console.WriteLine("Input algorithm name: Matrix, GLL, Union");
-            string algoType = Console.ReadLine();
-            while (true)
+            if (algoType.ToLower() == "matrix")
             {
-                if(algoType.ToLower() == "matrix")
-                {
-                    var matr = new MatrixAlgorithm(gramPath, autPath);
-                    if(resultPath == "") PrintPaths(matr.ReturnPaths());
-                    else WriteInFile(matr.ReturnPaths(), resultPath);
-                    break;
-                }
-                else if (algoType.ToLower() == "gll")
-                {
-                    var gll = new GLLAlgorithm(gramPath, autPath);
-                    if (resultPath == "") PrintPaths(gll.ReturnPaths());
-                    else WriteInFile(gll.ReturnPaths(), resultPath);
-                    break;
-                }
-                else if(algoType.ToLower() == "union")
-                {
-                    var matr = new MatrixAlgorithm(gramPath, autPath);
-                    if (resultPath == "") PrintPaths(matr.ReturnPaths());
-                    else WriteInFile(matr.ReturnPaths(), resultPath);
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid type. Try again.");
-                }
+                var matr = new MatrixAlgorithm(gramPath, autPath);
+                if (resultPath == "") PrintPaths(matr.ReturnPaths());
+                else WriteInFile(matr.ReturnPaths(), resultPath);
+            }
+            else if (algoType.ToLower() == "gll")
+            {
+                var gll = new GLLAlgorithm(gramPath, autPath);
+                if (resultPath == "") PrintPaths(gll.ReturnPaths());
+                else WriteInFile(gll.ReturnPaths(), resultPath);
+            }
+            else if (algoType.ToLower() == "union")
+            {
+                var matr = new UnionAutomats(gramPath, autPath);
+                if (resultPath == "") PrintPaths(matr.ReturnPaths());
+                else WriteInFile(matr.ReturnPaths(), resultPath);
+            }
+            else
+            {
+                Console.WriteLine("Invalid type. Try again.");
+                return;
             }
 
             Console.WriteLine("Press any key to close...");
@@ -267,7 +301,6 @@ namespace Grammar
             }
         }
 
-
         //SmallTests
         private static void SmallTestsMatrix()
         {
@@ -275,7 +308,7 @@ namespace Grammar
             {
                 string a = "t" + i.ToString() + ".dot";
                 string g = "t" + i.ToString() + ".txt";
-                Console.Write(a + " " + g + "\t");
+                Console.Write(a + " " + g + "\n");
                 var paths = new MatrixAlgorithm(@"..\..\data\grammars\" + g, @"..\..\data\automats\" + a);
                 PrintPaths(paths.ReturnPaths());
             }
@@ -285,9 +318,9 @@ namespace Grammar
         {
             for (int i = 1; i <= N; i++)
             {
-                string a = "t" + i.ToString() + ".dot";               
+                string a = "t" + i.ToString() + ".dot";
                 string g = "t" + i.ToString() + "g.dot";
-                Console.Write(a + " " + g + "\t");
+                Console.Write(a + " " + g + "\n");
                 var paths = new GLLAlgorithm(@"..\..\data\grammars\" + g, @"..\..\data\automats\" + a);
                 PrintPaths(paths.ReturnPaths());
             }
@@ -300,12 +333,13 @@ namespace Grammar
                 string a = "t" + i.ToString() + ".dot";
                 string g = "t" + i.ToString() + "g.dot";
 
-                Console.Write(a + " " + g + "\t");
+                Console.Write(a + " " + g + "\n");
                 var paths = new UnionAutomats(@"..\..\data\grammars\" + g, @"..\..\data\automats\" + a);
                 PrintPaths(paths.ReturnPaths());
             }
 
         }
+
         private static void PrintPaths(List<string> paths)
         {
             foreach (var p in paths)

@@ -83,7 +83,7 @@ namespace Grammar
         {
             if (path.Contains(".dot"))
             {
-                Console.WriteLine("Invalid type of file. Try again");
+                Console.WriteLine("Invalid type of Grammar file. Try again");
                 return;
             }
             using (StreamReader sr = new StreamReader(@path))
