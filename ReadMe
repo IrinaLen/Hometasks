@@ -2,22 +2,13 @@
 	.\build.ps1
 Далее, перейти в папку .\Grammar\Grammar\bin\Release
 
-Для запуска одного из тестов в командную строку ввести одну из следующих строчек:
-		.\Grammar -bigT -matrix
-		.\Grammar -bigT -GLL
-		.\Grammar -bigT -union
 
-		.\Grammar -smallT -matrix
-		.\Grammar -smallT -GLL
-		.\Grammar -smallT -union
-
-(Результат работы первых 3-x - будут файлы (папка Grammar\Grammar\data\results) с матрицей контрольных чисел для больших тестов и папкой с файлами со всеми путями)
-Для работы с произвольными файлами файлами ввести
-		.\Grammar
-		или
+Для работы с произвольными файлами файлами ввести одно из:
 		.\Grammar matrix regular.dot grammar.txt result.txt
 		.\Grammar union regular.dot grammar.dot result.txt
 		.\Grammar gll regular.dot grammar.dot result.txt
+		.\Grammar 
+		
 
 
 

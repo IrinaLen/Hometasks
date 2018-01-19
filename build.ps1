@@ -232,4 +232,9 @@ $cakeArguments += $ScriptArgs
 # Start Cake
 Write-Host "Running build script..."
 &$CAKE_EXE $cakeArguments
+
+./Grammar/Grammar/bin/Release/Grammar -t
+
 exit $LASTEXITCODE
+
+

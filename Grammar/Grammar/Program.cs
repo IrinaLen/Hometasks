@@ -11,71 +11,28 @@ namespace Grammar
 {
     class Program
     {
-        private const int N = 8; //количество тестов
-
+        private static ResultOutput output = new ResultOutput();
         static void Main(string[] args)
         {
-            if (args.Length == 1 || args.Length > 4)
+            if (args.Length != 1 && args.Length != 1 && args.Length != 3 && args.Length != 4)
             {
                 Console.WriteLine("Invalid number of arguments. Try again.");
                 return;
             }
-            if (args.Length == 2)
+
+            if (args.Length == 1)
             {
-                if (args[0] == "-bigT")
+                if (args[0] == "-t")
                 {
-                    if (args[1].ToLower() == "-matrix")
-                    {
-                        BigTestsMatrix();
-                        return;
-                    }
-                    if (args[1].ToLower() == "-gll")
-                    {
-                        BigTestGLL();
-                        return;
-                    }
-                    if (args[1].ToLower() == "-union")
-                    {
-                        BigTestsUnion();
-                        return;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid second argument. Try again.");
-                        return;
-                    }
-                }
-                else if (args[0].ToLower() == "-smallt")
-                {
-                    if (args[1].ToLower() == "-matrix")
-                    {
-                        SmallTestsMatrix();
-                        return;
-                    }
-                    if (args[1].ToLower() == "-gll")
-                    {
-                        SmallTestsGLL();
-                        return;
-                    }
-                    if (args[1].ToLower() == "-union")
-                    {
-                        SmallTestsUnion();
-                        return;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid second argument. Try again.");
-                        return;
-                    }
+                    new Tests();
+                    return;
                 }
                 else
                 {
-                    Console.WriteLine("Invalid first argument. Try again.");
+                    Console.WriteLine("Invalid number of arguments. Try again.");
                     return;
                 }
             }
-
-
 
             string algoType = "", autPath = "", gramPath = "", resultPath = "";
 
@@ -149,20 +106,20 @@ namespace Grammar
             if (algoType.ToLower() == "matrix")
             {
                 var matr = new MatrixAlgorithm(gramPath, autPath);
-                if (resultPath == "") PrintPaths(matr.ReturnPaths());
-                else WriteInFile(matr.ReturnPaths(), resultPath);
+                if (resultPath == "") output.PrintPaths(matr.ReturnPaths());
+                else output.WriteInFile(matr.ReturnPaths(), resultPath);
             }
             else if (algoType.ToLower() == "gll")
             {
                 var gll = new GLLAlgorithm(gramPath, autPath);
-                if (resultPath == "") PrintPaths(gll.ReturnPaths());
-                else WriteInFile(gll.ReturnPaths(), resultPath);
+                if (resultPath == "") output.PrintPaths(gll.ReturnPaths());
+                else output.WriteInFile(gll.ReturnPaths(), resultPath);
             }
             else if (algoType.ToLower() == "union")
             {
                 var matr = new UnionAutomats(gramPath, autPath);
-                if (resultPath == "") PrintPaths(matr.ReturnPaths());
-                else WriteInFile(matr.ReturnPaths(), resultPath);
+                if (resultPath == "") output.PrintPaths(matr.ReturnPaths());
+                else output.WriteInFile(matr.ReturnPaths(), resultPath);
             }
             else
             {
@@ -174,202 +131,5 @@ namespace Grammar
             Console.ReadKey();
         }
 
-        //BigTests
-        private static void BigTestsMatrix()
-        {
-            string[] automats =
-            {
-                "skos.dot",
-                "generations.dot",
-                "travel.dot",
-                "univ-bench.dot",
-                "atom-primitive.dot",
-                "biomedical-mesure-primitive.dot",
-                "foaf.dot",
-                "people-pets.dot",
-                "funding.dot",
-                "wine.dot",
-                "pizza.dot"
-            };
-
-            string[] grammars =
-            {
-                "Q1.txt",
-                "Q2.txt",
-                "Q3.txt"
-            };
-
-            using (StreamWriter sw = new StreamWriter(@"..\..\data\results\matrix_results.txt"))
-            {
-            	sw.WriteLine("Q1\t Q2\t Q3\t");
-
-                foreach (var a in automats)
-                {
-                    foreach (var g in grammars)
-                    {
-                        Console.Write(a + " " + g + "\n");
-                        var paths = new MatrixAlgorithm(@"..\..\data\grammars\" + g, @"..\..\data\automats\" + a);
-                        sw.Write(CountStart(paths.ReturnPaths()) + "\t");
-                        WriteInFile(paths.ReturnPaths(), @"..\..\data\results\matrix\result_" + a.Replace(".dot", "") + "_" + g.Replace(".txt", "") + ".txt");
-                    }
-                    sw.Write(a + "\r\n");
-                }
-            }
-        }
-
-        private static void BigTestGLL()
-        {
-            string[] automats =
-            {
-                "skos.dot",
-                "generations.dot",
-                "travel.dot",
-                "univ-bench.dot",
-                "atom-primitive.dot",
-                "biomedical-mesure-primitive.dot",
-                "foaf.dot",
-                "people-pets.dot",
-                "funding.dot",
-                "wine.dot",
-                "pizza.dot"
-            };
-
-            string[] grammars =
-            {
-                "Q1.dot",
-                "Q2.dot",
-                "Q3.dot"
-            };
-
-            using (StreamWriter sw = new StreamWriter(@"..\..\data\results\GLL_results.txt"))
-            {
-            	sw.WriteLine("Q1\t Q2\t Q3\t");
-
-                foreach (var a in automats)
-                {
-                    foreach (var g in grammars)
-                    {
-                        Console.Write(a + " " + g + "\n");
-                        var paths = new GLLAlgorithm(@"..\..\data\grammars\" + g, @"..\..\data\automats\" + a);
-                        sw.Write(CountStart(paths.ReturnPaths()) + "\t");
-                        WriteInFile(paths.ReturnPaths(), @"..\..\data\results\GLL\result_" + a.Replace(".dot", "") + "_" + g.Replace(".dot", "") + ".txt");
-                    }
-                    sw.Write(a + "\r\n");
-                }
-            }
-        }
-
-        private static void BigTestsUnion()
-        {
-            string[] automats =
-            {
-                "skos.dot",
-                "generations.dot",
-                "travel.dot",
-                "univ-bench.dot",
-                "atom-primitive.dot",
-                "biomedical-mesure-primitive.dot",
-                "foaf.dot",
-                "people-pets.dot",
-                "funding.dot",
-                "wine.dot",
-                "pizza.dot"
-            };
-
-            string[] grammars =
-            {
-                "Q1.dot",
-                "Q2.dot",
-                "Q3.dot"
-            };
-
-
-            using (StreamWriter sw = new StreamWriter(@"..\..\data\results\union_results.txt"))
-            {
-            	sw.Write("Q1\t Q2\t Q3\t");
-                foreach (var a in automats)
-                {
-                    foreach (var g in grammars)
-                    {
-                        Console.Write(a + " " + g + "\n");
-                        var paths = new UnionAutomats(@"..\..\data\grammars\" + g, @"..\..\data\automats\" + a);
-                        sw.Write(CountStart(paths.ReturnPaths()) + "\t");
-                        WriteInFile(paths.ReturnPaths(), @"..\..\data\results\union\result_" + a.Replace(".dot", "") + "_" + g.Replace(".dot", "") + ".txt");
-                    }
-                    sw.Write(a + "\r\n");
-                }
-            }
-        }
-
-        //SmallTests
-        private static void SmallTestsMatrix()
-        {
-            for (int i = 1; i <= N; i++)
-            {
-                string a = "t" + i.ToString() + ".dot";
-                string g = "t" + i.ToString() + ".txt";
-                Console.Write(a + " " + g + "\n");
-                var paths = new MatrixAlgorithm(@"..\..\data\grammars\" + g, @"..\..\data\automats\" + a);
-                PrintPaths(paths.ReturnPaths());
-            }
-        }
-
-        private static void SmallTestsGLL()
-        {
-            for (int i = 1; i <= N; i++)
-            {
-                string a = "t" + i.ToString() + ".dot";
-                string g = "t" + i.ToString() + "g.dot";
-                Console.Write(a + " " + g + "\n");
-                var paths = new GLLAlgorithm(@"..\..\data\grammars\" + g, @"..\..\data\automats\" + a);
-                PrintPaths(paths.ReturnPaths());
-            }
-        }
-
-        private static void SmallTestsUnion()
-        {
-            for (int i = 1; i <= N; i++)
-            {
-                string a = "t" + i.ToString() + ".dot";
-                string g = "t" + i.ToString() + "g.dot";
-
-                Console.Write(a + " " + g + "\n");
-                var paths = new UnionAutomats(@"..\..\data\grammars\" + g, @"..\..\data\automats\" + a);
-                PrintPaths(paths.ReturnPaths());
-            }
-
-        }
-
-        private static void PrintPaths(List<string> paths)
-        {
-            foreach (var p in paths)
-            {
-                Console.WriteLine(p);
-            }
-        }
-
-        private static void WriteInFile(List<string> paths, string filePath)
-        {
-            using (StreamWriter sw = new StreamWriter(filePath))
-            {
-                foreach (var p in paths)
-                {
-                    sw.WriteLine(p);
-                }
-            }
-        }
-
-        private static int CountStart(List<string> paths)
-        {
-            int k = 0;
-            foreach (var p in paths)
-            {
-                if (p.Contains("S,"))
-                {
-                    k++;
-                }
-            }
-            return k;
-        }
     }
 }

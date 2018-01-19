@@ -91,6 +91,8 @@
     <Compile Include="MatrixAlgorithm.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResultOutput.cs" />
+    <Compile Include="Tests.cs" />
     <Compile Include="UnionAutomats.cs" />
   </ItemGroup>
   <ItemGroup>

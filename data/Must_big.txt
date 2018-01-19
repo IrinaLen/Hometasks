@@ -1,0 +1,12 @@
+Q1	 Q2	 Q3	
+810	1	32	skos.dot
+2164	0	19	generations.dot
+2499	63	31	travel.dot
+2540	81	12	univ-bench.dot
+15454	122	3	atom-primitive.dot
+15156	2871	0	biomedical-mesure-primitive.dot
+4118	10	46	foaf.dot
+9472	37	36	people-pets.dot
+17634	1158	18	funding.dot
+66572	133	1215	wine.dot
+56195	1262	9520	pizza.dot
