@@ -92,7 +92,7 @@ namespace Grammar
                 string[] parsedLine;
                 while ((line = sr.ReadLine()) != null)
                 {
-                    parsedLine = line.Split();//S, ->, B, C
+                    parsedLine = line.Split(default(string[]), StringSplitOptions.RemoveEmptyEntries);//S, :, B, C
                     if (String.Equals(parsedLine[2], "eps"))//epsilon- переход
                     {
                         epsilon.Add(parsedLine[0]);
