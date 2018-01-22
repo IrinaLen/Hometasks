@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -92,32 +92,37 @@ namespace Grammar
                 string[] parsedLine;
                 while ((line = sr.ReadLine()) != null)
                 {
+                    parsedLine = line.Split(':');
+                    string leftPart = parsedLine[0].Replace(" ", "");
+                    string[] rightPart = parsedLine[1].Split(default(string[]), StringSplitOptions.RemoveEmptyEntries);//S, ->, B, C
+                    if (String.Equals(rightPart[0], "eps"))//epsilon- переход
+
                     parsedLine = line.Split(default(string[]), StringSplitOptions.RemoveEmptyEntries);//S, :, B, C
                     if (String.Equals(parsedLine[2], "eps"))//epsilon- переход
                     {
-                        epsilon.Add(parsedLine[0]);
+                        epsilon.Add(leftPart);
                     }
-                    else if (!('A' <= parsedLine[2][0] && parsedLine[2][0] <= 'Z'))
+                    else if (!('A' <= rightPart[0][0] && rightPart[0][0] <= 'Z'))
                     {
-                        if (terms.ContainsKey(parsedLine[2]))
+                        if (terms.ContainsKey(rightPart[0]))
                         {
-                            terms[parsedLine[2]].Add(parsedLine[0]);
+                            terms[rightPart[0]].Add(leftPart);
                         }
                         else
                         {
-                            terms.Add(parsedLine[2], new List<string> { parsedLine[0] });
+                            terms.Add(rightPart[0], new List<string> { leftPart });
                         }
                     }
                     else
                     {
-                        string key = parsedLine[2] + " " + (parsedLine.Length < 4 ? "" : parsedLine[3]);
+                        string key = rightPart[0] + " " + (rightPart.Length == 1 ? "" : rightPart[1]);
                         if (toFrom.ContainsKey(key))
                         {
-                            toFrom[key].Add(parsedLine[0]);
+                            toFrom[key].Add(leftPart);
                         }
                         else
                         {
-                            toFrom.Add(key, new List<string>{parsedLine[0]});
+                            toFrom.Add(key, new List<string>{leftPart});
                         }
                     }
                 }
