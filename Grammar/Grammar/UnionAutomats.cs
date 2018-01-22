@@ -93,7 +93,9 @@ namespace Grammar
             {
                 foreach (var a in automat.Nodes)
                 {
-                    idForPair.Add(a.Key.ToString() + "," + g.Id.ToString(), k);
+                    var s = a.Key.ToString() + "," + g.Id.ToString();
+                    if(idForPair.ContainsKey(s)) continue;
+                    idForPair.Add(s, k);
                     k++;
                 }
 

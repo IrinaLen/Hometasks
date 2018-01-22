@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -95,10 +95,9 @@ namespace Grammar
                     parsedLine = line.Split(':');
                     string leftPart = parsedLine[0].Replace(" ", "");
                     string[] rightPart = parsedLine[1].Split(default(string[]), StringSplitOptions.RemoveEmptyEntries);//S, ->, B, C
-                    if (String.Equals(rightPart[0], "eps"))//epsilon- переход
 
                     parsedLine = line.Split(default(string[]), StringSplitOptions.RemoveEmptyEntries);//S, :, B, C
-                    if (String.Equals(parsedLine[2], "eps"))//epsilon- переход
+                    if (String.Equals(rightPart[0], "eps"))//epsilon- переход
                     {
                         epsilon.Add(leftPart);
                     }

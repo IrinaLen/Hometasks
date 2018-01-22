@@ -33,7 +33,7 @@ namespace Grammar
 
             mustSmall = new[]
             {
-                4, 1, 2, 2, 15, 20, 123, 1
+                4, 1, 2, 2, 15, 20, 123, 1, 12
             };
             System.Diagnostics.Stopwatch swatch = new System.Diagnostics.Stopwatch(); // создаем объект
             swatch.Start(); // старт
@@ -61,7 +61,7 @@ namespace Grammar
 
         }
 
-        private const int N = 8; //количество тестов
+        private const int N = 9; //количество тестов
         private ResultOutput output = new ResultOutput();
         //BigTests
         private void BigTestsMatrix()
