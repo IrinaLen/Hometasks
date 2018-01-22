@@ -1,4 +1,4 @@
-﻿S : A S1
+﻿S : A  S1
 S1 : S B 
 S : eps
 A : a
