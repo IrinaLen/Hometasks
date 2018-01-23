@@ -115,9 +115,10 @@ namespace Grammar
         private void Union()
         {
             bool hasChanged = false;
-            List<Tuple<int, string, int>> addToAut = new List<Tuple<int, string, int>>();
+            HashSet<Tuple<int, string, int>> addToAut = new HashSet<Tuple<int, string, int>>();
             Stack<Tuple<int, int, string, int, int>> stack = new Stack<Tuple<int, int, string, int, int>>(); //start(a,g), labelб finish
-            int currAutState, currGramState;
+            HashSet< Tuple < int, int, string, int, int>> history = new HashSet<Tuple<int, int, string, int, int>>();
+               int currAutState, currGramState;
             int k = 1;
             do
             {
@@ -133,13 +134,15 @@ namespace Grammar
                         if (grammarFinal.Contains(currGramState))
                         {
                             AddToUnion(a, g, grammarStart[g], currAutState, currGramState);
-                            addToAut.Add(Tuple.Create(a, grammarStart[g], currAutState));
+                            if (!addToAut.Contains(Tuple.Create(a, grammarStart[g], currAutState)))
+                                addToAut.Add(Tuple.Create(a, grammarStart[g], currAutState));
                         }
                         do
                         {
                             if (stack.Count > 0)
                             {
                                 var curSt = stack.Pop();
+                                history.Add(curSt);
                                 AddToUnion(curSt.Item1, curSt.Item2, curSt.Item3, curSt.Item4, curSt.Item5);
                                 currAutState = curSt.Item4;
                                 currGramState = curSt.Item5;
@@ -153,6 +156,9 @@ namespace Grammar
                                     {
                                         foreach (var p in automatPaths[currAutState][l])
                                         {
+                                            var t = Tuple.Create(currAutState, currGramState, l, p,
+                                                grammarPaths[currGramState][l]);
+                                            if (!history.Contains(t))
                                             stack.Push(Tuple.Create(currAutState, currGramState, l, p,
                                                 grammarPaths[currGramState][l]));
                                         }
@@ -162,10 +168,11 @@ namespace Grammar
                             if (grammarFinal.Contains(currGramState))
                             {
                                 AddToUnion(a, g, grammarStart[g], currAutState, currGramState);
-                                addToAut.Add(Tuple.Create(a, grammarStart[g], currAutState));
+                                if(!addToAut.Contains(Tuple.Create(a, grammarStart[g], currAutState))) addToAut.Add(Tuple.Create(a, grammarStart[g], currAutState));
                             }
 
                         } while (stack.Count > 0);
+                        history.Clear();
                     }
                 }
                 AddToAutomath(ref addToAut, ref hasChanged);
@@ -190,7 +197,7 @@ namespace Grammar
             }
         }
 
-        private void AddToAutomath(ref List<Tuple<int, string, int>> addToAut, ref bool hasChanged)
+        private void AddToAutomath(ref HashSet<Tuple<int, string, int>> addToAut, ref bool hasChanged)
         {
             hasChanged = false;
             int x1, x2;

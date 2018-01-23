@@ -11,9 +11,9 @@ namespace Grammar
     class Tests
     {
     	private int[] mustBig, mustSmall;
-
-        public Tests()
+        public void Start()
         {
+
             mustBig = new[]
             {
                 810, 1, 32,
@@ -37,6 +37,7 @@ namespace Grammar
             };
             System.Diagnostics.Stopwatch swatch = new System.Diagnostics.Stopwatch(); // создаем объект
             swatch.Start(); // старт
+
             BigTestsMatrix();
             Console.WriteLine("--------------------");
             BigTestGLL();
@@ -46,10 +47,10 @@ namespace Grammar
             Console.WriteLine("--------------------");
 
 
-            SmallTestsMatrix();            
+            SmallTestsMatrix();
             Console.WriteLine("--------------------");
 
-            SmallTestsGLL();            
+            SmallTestsGLL();
             Console.WriteLine("--------------------");
 
             SmallTestsUnion();
@@ -58,7 +59,6 @@ namespace Grammar
 
             swatch.Stop(); // стоп
             Console.WriteLine(swatch.Elapsed); // выводим результат в консоль
-
         }
 
         private const int N = 9; //количество тестов
@@ -272,5 +272,25 @@ namespace Grammar
 
         }
 
+        public void LocalTests()
+        {
+            List<Tuple<int, int, int>> resList = new List<Tuple<int, int, int>>();
+            for (int a = 1; a <= 12; a++)
+            {
+                for (int g = 1; g <= 10; g++)
+                {
+                    Console.Write(a + " " + g + "\n");
+                    var m = new MatrixAlgorithm(@"D:\UnitTests\grammars\" + g + ".txt", @"D:\UnitTests\graphs\" + a + ".dot");
+                    int rm = output.CountStart(m.ReturnPaths());
+                    var gl = new GLLAlgorithm(@"D:\UnitTests\grammars\" + g + ".dot", @"D:\UnitTests\graphs\" + a + ".dot");
+                    int rgl = output.CountStart(gl.ReturnPaths());
+                    var u = new UnionAutomats(@"D:\UnitTests\grammars\" + g + ".dot", @"D:\UnitTests\graphs\" + a + ".dot");
+                    int ru = output.CountStart(u.ReturnPaths());
+                    resList.Add(Tuple.Create(rm, rgl, ru));
+                    if (ru == rgl && rgl == rm) Console.WriteLine("-----------\nOK\n-----------\n");
+                    else Console.WriteLine("-----------\nFail\n-----------\n");
+                }
+            }
+        }
     }
 }

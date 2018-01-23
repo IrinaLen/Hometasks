@@ -24,7 +24,7 @@ namespace Grammar
             {
                 if (args[0] == "-t")
                 {
-                    new Tests();
+                    new Tests().Start();
                     return;
                 }
                 else

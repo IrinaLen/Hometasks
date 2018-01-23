@@ -200,7 +200,6 @@ namespace Grammar
                         }
                     }
                 }
-                Console.Write("\n");
 
             } while (wasChanged);
         }
